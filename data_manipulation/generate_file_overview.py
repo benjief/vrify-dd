@@ -14,7 +14,7 @@ def select_column(df):
     available_columns = [col for col in df.columns if col.lower() not in excluded_columns]
     
     # Prompt for the column to visualize
-    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to visualize?")
+    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to visualize as frequency histogram?")
     
     if column_name not in available_columns:
         raise ValueError(f"Column '{column_name}' not found in DataFrame.")
@@ -41,6 +41,12 @@ def plot_histogram(df, column):
     
     # Show the plot
     plt.show()
+    
+def prompt_for_visualization():
+    """Ask the user if they want to visualize data."""
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+    return messagebox.askyesno("Data Visualization", "Do you want to visualize a column as a frequency histogram?")
 
 def prompt_for_stats():
     """Ask the user if they want to generate key statistics."""
@@ -88,17 +94,21 @@ if file_path:
     df = load_file(file_path)
     
     if df is not None:
-        # # Display the first 5 rows of data
-        # print(df.head().to_markdown(index=False, numalign="left", stralign="left"))
+        # Display the first 5 rows of data
+        print(df.head().to_markdown(index=False, numalign="left", stralign="left"))
 
         # Print the column names and their data types
         print(df.info())
-
-        # Prompt the user to select the column to visualize
-        column_to_visualize = select_column(df)
-
-        # Plot a histogram of values for the selected column
-        plot_histogram(df, column_to_visualize)
+        
+        # Ask the user if they want to visualize data
+        if prompt_for_visualization():
+            try:
+                # Prompt the user to select the column to visualize
+                column_to_visualize = select_column(df)
+                # Plot a histogram of values for the selected column
+                plot_histogram(df, column_to_visualize)
+            except ValueError as e:
+                print(e)
 
         # Ask the user if they want to generate key statistics
         if prompt_for_stats():

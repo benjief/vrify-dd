@@ -7,7 +7,6 @@ from scipy.interpolate import griddata
 import tkinter as tk
 from tkinter import filedialog, simpledialog
 
-
 def select_csv_file():
     """Open a file dialog to allow the user to select a CSV file."""
     root = tk.Tk()
@@ -42,18 +41,6 @@ def select_column(df):
     
     return column_name
 
-def get_histogram_labels():
-    """Prompt the user for x-label, y-label, and title."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    # Prompt for the x-label, y-label, and title
-    x_label = simpledialog.askstring("Input", "Enter x-label for the histogram:")
-    y_label = simpledialog.askstring("Input", "Enter y-label for the histogram:")
-    plot_title = simpledialog.askstring("Input", "Enter title for the histogram:")
-    
-    return x_label, y_label, plot_title
-
 def get_heatmap_label():
     """Prompt the user for x-label, y-label, title, and legend label."""
     root = tk.Tk()
@@ -67,25 +54,6 @@ def get_heatmap_label():
     
     return x_label, y_label, plot_title, legend_label    
 
-def get_cleaning_value(column_name):
-    """Prompt the user for the value to clean from the selected column."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    # Prompt for the value to clean
-    cleaning_value = simpledialog.askstring("Input", f"Enter the value to clean in the column '{column_name}':")
-    
-    try:
-        cleaning_value = float(cleaning_value)
-    except ValueError:
-        raise ValueError(f"The cleaning value must be a number.")
-    
-    return cleaning_value
-
-# Get rid of display limits
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-
 # Get the selected CSV file
 csv_file_path = select_csv_file()
 
@@ -94,36 +62,8 @@ if csv_file_path:
     # Read the CSV file into a DataFrame
     df = pd.read_csv(csv_file_path)
 
-    # Display the first 5 rows of data
-    print(df.head().to_markdown(index=False, numalign="left", stralign="left"))
-
-    # Print the column names and their data types
-    print(df.info())
-
     # Prompt the user to select the column to visualize
     column_to_visualize = select_column(df)
-    
-    # Prompt the user for x-label, y-label, and title
-    x_label, y_label, plot_title = get_histogram_labels()
-    
-    # Plot a histogram of values for the selected column
-    df[column_to_visualize].hist(bins=50, figsize=(8, 6))
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
-    plt.title(plot_title)
-    plt.show()
-    
-    # Proceed with cleaning (or not, depending on what the user chooses)
-    proceed_cleaning = simpledialog.askstring("Input", "Do you want to proceed with data cleaning? (yes/no):")
-
-    if proceed_cleaning.lower() == 'yes':
-        # Prompt the user for the value to clean
-        cleaning_value = get_cleaning_value(column_to_visualize)
-        
-        # Remove rows where the selected column has the cleaning value
-        df = df[df[column_to_visualize] != cleaning_value]
-    else:
-        print("Skipping data cleaning.")
 
     # Create a GeoDataFrame
     geometry = [Point(xy) for xy in zip(df['Longitude'], df['Latitude'])]
