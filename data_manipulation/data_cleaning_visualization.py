@@ -25,6 +25,23 @@ def select_csv_file():
     
     return file_path
 
+def select_column(df):
+    """Prompt the user to select which column to visualize, excluding Latitude and Longitude."""
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+    
+    # Filter out columns related to Latitude and Longitude
+    excluded_columns = ['latitude', 'longitude', 'lat', 'lon']
+    available_columns = [col for col in df.columns if col.lower() not in excluded_columns]
+    
+    # Prompt for the column to visualize
+    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to visualize?")
+    
+    if column_name not in available_columns:
+        raise ValueError(f"Column '{column_name}' not found in DataFrame.")
+    
+    return column_name
+
 def get_histogram_labels():
     """Prompt the user for x-label, y-label, and title."""
     root = tk.Tk()
@@ -50,6 +67,21 @@ def get_heatmap_label():
     
     return x_label, y_label, plot_title, legend_label    
 
+def get_cleaning_value(column_name):
+    """Prompt the user for the value to clean from the selected column."""
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+    
+    # Prompt for the value to clean
+    cleaning_value = simpledialog.askstring("Input", f"Enter the value to clean in the column '{column_name}':")
+    
+    try:
+        cleaning_value = float(cleaning_value)
+    except ValueError:
+        raise ValueError(f"The cleaning value must be a number.")
+    
+    return cleaning_value
+
 # Get rid of display limits
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -68,11 +100,14 @@ if csv_file_path:
     # Print the column names and their data types
     print(df.info())
 
+    # Prompt the user to select the column to visualize
+    column_to_visualize = select_column(df)
+    
     # Prompt the user for x-label, y-label, and title
     x_label, y_label, plot_title = get_histogram_labels()
     
-    # Plot a histogram of values
-    df['Value'].hist(bins=50, figsize=(8, 6))
+    # Plot a histogram of values for the selected column
+    df[column_to_visualize].hist(bins=50, figsize=(8, 6))
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.title(plot_title)
@@ -82,8 +117,11 @@ if csv_file_path:
     proceed_cleaning = simpledialog.askstring("Input", "Do you want to proceed with data cleaning? (yes/no):")
 
     if proceed_cleaning.lower() == 'yes':
-        value_to_drop = -999999
-        df = df[df['Value'] != value_to_drop]
+        # Prompt the user for the value to clean
+        cleaning_value = get_cleaning_value(column_to_visualize)
+        
+        # Remove rows where the selected column has the cleaning value
+        df = df[df[column_to_visualize] != cleaning_value]
     else:
         print("Skipping data cleaning.")
 
@@ -91,15 +129,15 @@ if csv_file_path:
     geometry = [Point(xy) for xy in zip(df['Longitude'], df['Latitude'])]
     gdf = gpd.GeoDataFrame(df, geometry=geometry)
     
-    # Extract longitude, latitude, and Bouguer gravity anomaly data
+    # Extract longitude, latitude, and the selected column's data
     lon = df['Longitude']
     lat = df['Latitude']
-    values = df['Value']
+    values = df[column_to_visualize]
 
     # Create a grid to interpolate the values onto
     grid_x, grid_y = np.mgrid[lon.min():lon.max():500j, lat.min():lat.max():500j]
 
-    # Interpolate Bouguer anomaly values onto the grid
+    # Interpolate the selected column's values onto the grid
     grid_z = griddata((lon, lat), values, (grid_x, grid_y), method='cubic')
     
     # Prompt the user for x-label, y-label, title, and legend label
