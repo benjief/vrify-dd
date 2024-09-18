@@ -5,41 +5,33 @@ import geopandas as gpd
 from shapely.geometry import Point
 from scipy.interpolate import griddata
 import tkinter as tk
-from tkinter import filedialog, simpledialog
+from tkinter import simpledialog, filedialog
+import rasterio
+from rasterio.transform import from_origin
+from utils import select_file, select_column
 
-def select_csv_file():
-    """Open a file dialog to allow the user to select a CSV file."""
+def get_heatmap_label():
+    """Prompt the user for x-label, y-label, title, and legend label."""
     root = tk.Tk()
     root.withdraw()  # Hide the root window
     
-    # Open file dialog to select a CSV file
-    file_path = filedialog.askopenfilename(
-        title="Select CSV File", 
-        filetypes=[("CSV files", "*.csv")])  # Limit selection to CSV files
+    # Prompt for the x-label, y-label, and title
+    x_label = simpledialog.askstring("Input", "Enter x-label for the heatmap:")
+    y_label = simpledialog.askstring("Input", "Enter y-label for the heatmap:")
+    plot_title = simpledialog.askstring("Input", "Enter title for the heatmap:")
+    legend_label = simpledialog.askstring("Input", "Enter label for the legend:")
     
-    if file_path:
-        print(f"Selected file: {file_path}")
-    else:
-        print("No file selected.")
-    
-    return file_path
+    return x_label, y_label, plot_title, legend_label   
 
-def select_column(df):
-    """Prompt the user to select which column to visualize, excluding Latitude and Longitude."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    # Filter out columns related to Latitude and Longitude
-    excluded_columns = ['latitude', 'longitude', 'lat', 'lon']
-    available_columns = [col for col in df.columns if col.lower() not in excluded_columns]
-    
-    # Prompt for the column to visualize
-    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to visualize?")
-    
-    if column_name not in available_columns:
-        raise ValueError(f"Column '{column_name}' not found in DataFrame.")
-    
-    return column_name
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import geopandas as gpd
+from shapely.geometry import Point
+from scipy.interpolate import griddata
+import tkinter as tk
+from tkinter import simpledialog
+from utils import select_file, select_column
 
 def get_heatmap_label():
     """Prompt the user for x-label, y-label, title, and legend label."""
@@ -54,8 +46,37 @@ def get_heatmap_label():
     
     return x_label, y_label, plot_title, legend_label    
 
+def save_as_geotiff(grid_x, grid_y, grid_z, lon_min, lat_max, output_path):
+    """Save the heatmap as a GeoTIFF file."""
+    transform = from_origin(lon_min, lat_max, (grid_x[1, 0] - grid_x[0, 0]), (grid_y[0, 1] - grid_y[0, 0]))
+    
+    # Fix issues with transform (the transform introduces a 90-degree clockwise rotation)
+    grid_z = np.transpose(grid_z)
+    grid_z = np.flipud(grid_z)  
+
+    with rasterio.open(
+        output_path, 'w', driver='GTiff',
+        height=grid_z.shape[0], width=grid_z.shape[1],
+        count=1, dtype=grid_z.dtype, crs='EPSG:4326',
+        transform=transform) as dst:
+        dst.write(grid_z, 1)
+    print(f"GeoTIFF saved to {output_path}")
+    
+def prompt_for_export(grid_x, grid_y, grid_z):
+    """Ask the user if they want to export the heatmap as GeoTIFF."""
+    root = tk.Tk()
+    root.withdraw()
+    
+    export_format = simpledialog.askstring("Export", "Would you like to export the heatmap as a GeoTIFF? (Enter 'Yes' or 'No'):")
+    if export_format.lower() == 'yes':
+        file_path = filedialog.asksaveasfilename(defaultextension=".tif", filetypes=[("GeoTIFF files", "*.tif")])
+        if file_path:
+            save_as_geotiff(grid_x, grid_y, grid_z, grid_x.min(), grid_y.max(), file_path)
+    else:
+        print("No export requested.")
+
 # Get the selected CSV file
-csv_file_path = select_csv_file()
+csv_file_path = select_file([("CSV Files", "*.csv")])
 
 # Proceed only if a file was selected
 if csv_file_path:
@@ -63,7 +84,7 @@ if csv_file_path:
     df = pd.read_csv(csv_file_path)
 
     # Prompt the user to select the column to visualize
-    column_to_visualize = select_column(df)
+    column_to_visualize = select_column(df, "Which column would you like to generate a heatmap for?")
 
     # Create a GeoDataFrame
     geometry = [Point(xy) for xy in zip(df['Longitude'], df['Latitude'])]
@@ -91,5 +112,8 @@ if csv_file_path:
     plt.ylabel(y_label)
     plt.title(plot_title)
     plt.show()
+    
+    # Prompt the user to export the heatmap as GeoTIFF
+    prompt_for_export(grid_x, grid_y, grid_z)
 else:
     print("No CSV file was selected. Exiting...")

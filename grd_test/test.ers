@@ -1,0 +1,39 @@
+DatasetHeader Begin
+	Version		= "7.0"
+	Name		= "test.ers"
+	LastUpdated	= Tue Sep 17 06:21:59 GMT 2024
+	DataSetType	= ERStorage
+	DataType	= Raster
+	ByteOrder	= LSBFirst
+	CoordinateSpace Begin
+		Datum		= "WGS84"
+		Projection	= "GEODETIC"
+		CoordinateType	= LL
+		Rotation	= 0:0:0.0
+	CoordinateSpace End
+	RasterInfo Begin
+		CellType	= Unsigned8BitInteger
+		CellInfo Begin
+			Xdimension	= 0.0010485211933344411
+			Ydimension	= 0.0010485211933344411
+		CellInfo End
+		NrOfLines	= 759
+		NrOfCellsPerLine	= 899
+		RegistrationCoord Begin
+			Latitude	= 38:36:8.045021124
+			Longitude	= -119:41:18.289655172
+		RegistrationCoord End
+		RegistrationCellX	= 0
+		RegistrationCellY	= 758
+		NrOfBands	= 3
+		BandId Begin
+			Value		= "Red"
+		BandId End
+		BandId Begin
+			Value		= "Green"
+		BandId End
+		BandId Begin
+			Value		= "Blue"
+		BandId End
+	RasterInfo End
+DatasetHeader End

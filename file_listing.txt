@@ -1,0 +1,39 @@
+Shapefiles:
+Active_Mines_and_Energy_Producers_2021__NBMG_.shp
+Active_Mining_Claims_Listings_Per_Section__NDOM_.shp
+Drill_Projects_2018__NBMG_.shp
+Geochronological_Database_Nevada__USGS_.shp
+Geothermal_Wells__NBMG_.shp
+Industrial_Minerals__NBMG_.shp
+Mesozoic_Terranes_Domain__USGS_NBMG_.shp
+Mineral_Resource_Data_System__USGS__NBMG_.shp
+Mining_Districts__NBMG__NDOM_.shp
+NURE_HSSR_Geochemistry_Stream_Sediments__USGS_.shp
+NURE_HSSR_Geochemistry_Water_Samples__USGS_.shp
+Precious_Metals__NBMG_.shp
+Significant_Deposits__NBMG_.shp
+Soils_Geochemistry_Nevada__USGS_.shp
+Stewart_and_Carlson_Contacts__NBMG_.shp
+Stewart_and_Carlson_Faults__NBMG_.shp
+Stewart_and_Carlson_Geologic_Units__NBMG_.shp
+
+CSV Files:
+CGMW-A Total Magnetic Intensity (A) - Satellite in-fill.csv
+CGMW-B Total Magnetic Intensity (B) - Oceanic model in-fill.csv
+GRACE Gravity Point Data.csv
+reno_mag.csv
+reno_rad.csv
+USA_isograv_data_WGS84.csv
+walker_lake_mag.csv
+walker_lake_rad.csv
+WDMAM Point Data.csv
+CGMW-A Total Magnetic Intensity (A) - Satellite in-fill.csv
+DNAG Bouguer Gravity.csv
+DNAG Magnetic Field.csv
+Free-air gravity (mGal), Sandwell v23-1.csv
+GRACE Gravity Model Grid.csv
+Magnetic Map of North America.csv
+RTP.csv
+SRTM World Elevation 3 Arc-Second.csv
+SRTM1 Continental USA.csv
+Vertical gravity gradient, Sandwell v23-1.csv

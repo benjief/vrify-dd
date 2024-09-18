@@ -1,25 +1,8 @@
 import pandas as pd
 import tkinter as tk
-from tkinter import simpledialog, messagebox
+from tkinter import  messagebox
 import matplotlib.pyplot as plt
-from utils import select_file, load_file
-
-def select_column(df):
-    """Prompt the user to select which column to visualize, excluding Latitude and Longitude."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    # Filter out columns related to Latitude and Longitude
-    excluded_columns = ['latitude', 'longitude', 'lat', 'lon']
-    available_columns = [col for col in df.columns if col.lower() not in excluded_columns]
-    
-    # Prompt for the column to visualize
-    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to visualize as frequency histogram?")
-    
-    if column_name not in available_columns:
-        raise ValueError(f"Column '{column_name}' not found in DataFrame.")
-    
-    return column_name
+from utils import select_file, load_file, select_column, select_multiple_columns
 
 def plot_histogram(df, column):
     """Plot a histogram of the selected column."""
@@ -54,17 +37,7 @@ def prompt_for_stats():
     root.withdraw()  # Hide the root window
     return messagebox.askyesno("Key Statistics", "Do you want to generate key statistics for any columns?")
 
-def select_columns_for_stats(df):
-    """Prompt the user to select columns for which to generate statistics."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
 
-    # Allow user to input columns separated by commas
-    columns = simpledialog.askstring("Input", f"Enter columns (separated by commas) for which you want key statistics.\nAvailable columns: {', '.join(df.columns)}")
-
-    # Split and clean the input into a list of columns
-    selected_columns = [col.strip() for col in columns.split(',') if col.strip() in df.columns]
-    return selected_columns
 
 def generate_key_statistics(df, columns):
     """Generate key statistics (min, max, mean, median, mode, std, var) for selected columns."""
@@ -104,7 +77,7 @@ if file_path:
         if prompt_for_visualization():
             try:
                 # Prompt the user to select the column to visualize
-                column_to_visualize = select_column(df)
+                column_to_visualize = select_column(df, "Which column would you like to visualize as frequency histogram?")
                 # Plot a histogram of values for the selected column
                 plot_histogram(df, column_to_visualize)
             except ValueError as e:
@@ -113,7 +86,7 @@ if file_path:
         # Ask the user if they want to generate key statistics
         if prompt_for_stats():
             # Let the user select columns for which to generate statistics
-            columns_to_analyze = select_columns_for_stats(df)
+            columns_to_analyze = select_multiple_columns(df, "Enter columns (separated by commas) for which you want key statistics")
 
             # Generate and display key statistics for the selected columns
             generate_key_statistics(df, columns_to_analyze)

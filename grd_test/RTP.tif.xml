@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='C:\Users\Stanislawa\Documents\Geosoft\Desktop Applications\stylesheets\Geosoft-2018[Geosoft-2018.xslt].xslt'?>
+<gmd:MD_Metadata xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../schemas/iso19139fra/gmd/gmd.xsd" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:map="urn:brgm:mapping" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gfc="http://www.isotc211.org/2005/gfc" xmlns:gco="http://www.isotc211.org/2005/gco">
+	<geo:geosoft xmlns:geo="http://www.geosoft.com/schema/geo">
+		<geo:dataset version="1">
+			<geo:metadata_created_by>Benjie Friedman</geo:metadata_created_by>
+			<geo:metadata_creation_date>2024-09-15</geo:metadata_creation_date>
+			<geo:title>RTP</geo:title>
+			<geo:unitofmeasurement/>
+			<geo:category>Magnetics</geo:category>
+			<geo:region/>
+			<geo:continent>World</geo:continent>
+			<geo:file_format>tif</geo:file_format>
+			<geo:resolution/>
+			<geo:weblink>http://projects.gtk.fi/WDMAM/</geo:weblink>
+			<geo:data_source/>
+			<geo:type>Processed</geo:type>
+			<geo:purpose/>
+			<geo:project_name>c:\users\subte\onedrive\documents\geosoft projects\vrify.gpf</geo:project_name>
+			<geo:confidentiality>Public</geo:confidentiality>
+			<geo:project_type/>
+			<geo:subject>Geophysics</geo:subject>
+			<geo:description>This is a globally corrected reduction to the pole (RTP) of the World Digital Magnetic Anomaly Map.  The reduction was completed in 2x2 degree tiles that were recombined to create this global image.</geo:description>
+			<geo:Metadata_created_by/>
+			<geo:data_created_by>Benjie Friedman</geo:data_created_by>
+			<geo:data_creation_date>2024-09-15</geo:data_creation_date>
+			<geo:lineage>
+				<geo:process name="geogxnet.dll(Geosoft.GX.GridUtils.CopyConvertMultiGrids;Run)" user="Benjie Friedman" version="Version 2024.1 (20240530.21)" date="2024-09-15" time="19:52:50">
+					<geo:parameter name="GRIDCOPY::DISPLAY_OPTION" value="Do not display" type="string"/>
+					<geo:parameter name="GRIDCOPY::IN" value="..\Personal_Projects\interview_prep\vrify-dd\data\RTP.GRD(GRD)" type="string"/>
+					<geo:parameter name="GRIDCOPY::OUT" value="..\Personal_Projects\interview_prep\vrify-dd\grd_test\RTP.tif(TIF;TYPE=DATA)" type="string"/>
+					<geo:parameter name="GRIDCOPY::OUT_FORMAT" value="TIF;TYPE=DATA" type="string"/>
+					<geo:parameter name="GRIDCOPY::OVERWRITE" value="1" type="integer"/>
+					<geo:source name="c:\Users\subte\OneDrive\documents\Personal_Projects\interview_prep\vrify-dd\data\RTP.GRD" type="GRID">
+						<geo:lineage>
+							<geo:process name="Geosoft.EIMS.GXNet.dll(Geosoft.EIMS.GX.Seeker.SeekerMainForm;Run)" user="Montreal\Stanislawa" version="Version 2024.1 (20240530.21)" date="2024-09-10" time="09:43:08">
+								<geo:parameter name="FIND_DATA::CoordinateSystem" value="GEOGCS[&quot;GCS_WGS_1984&quot;,DATUM[&quot;D_WGS_1984&quot;,SPHEROID[&quot;WGS_1984&quot;,6378137.0,298.257223563]],PRIMEM[&quot;Greenwich&quot;,0.0],UNIT[&quot;Degree&quot;,0.0174532925199433],AUTHORITY[&quot;EPSG&quot;,4326]]" type="string"/>
+								<geo:parameter name="FIND_DATA::File" value="G:\My Drive\Projects\Public_data_sorting_exercise\NVMinDownload\zipfolder\RTP.GRD(GRD)" type="string"/>
+								<geo:parameter name="FIND_DATA::MaxX" value="-118.975700378418" type="string"/>
+								<geo:parameter name="FIND_DATA::MaxY" value="39.162744" type="string"/>
+								<geo:parameter name="FIND_DATA::MinX" value="-119.433746337891" type="string"/>
+								<geo:parameter name="FIND_DATA::MinY" value="38.8208923339844" type="string"/>
+								<geo:parameter name="FIND_DATA::Resolution" value="0.05" type="string"/>
+								<geo:parameter name="FIND_DATA::Title" value="RTP" type="string"/>
+								<geo:parameter name="FIND_DATA::Type" value="Grid" type="string"/>
+								<geo:parameter name="FIND_DATA::URL" value="https://public.dap.seequent.com" type="string"/>
+							</geo:process>
+						</geo:lineage>
+					</geo:source>
+				</geo:process>
+			</geo:lineage>
+			<geo:georeference>
+				<geo:dataextents>
+					<geo:extent2d minx="-119.5" miny="38.75" maxx="-118.9" maxy="39.25"/>
+				</geo:dataextents>
+				<geo:projection type="GEOGRAPHIC" name="WGS 84" ellipsoid="WGS 84" datum="WGS 84" wellknown_epsg="4326" datumtrf="WGS 84" datumtrf_description="[WGS 84] World" radius="6378137" eccentricity="0.0818191908426215">
+					<geo:shift x="0" y="0" z="0"/>
+					<geo:units name="dega" unit_scale="1"/>
+				</geo:projection>
+			</geo:georeference>
+		</geo:dataset>
+	</geo:geosoft>
+	<gmd:identificationInfo>
+		<gmd:MD_DataIdentification>
+			<gmd:citation>
+				<gmd:CI_Citation>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2024-9-15</gco:Date>
+							</gmd:date>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:title>
+						<gco:CharacterString>RTP</gco:CharacterString>
+					</gmd:title>
+					<gmd:collectiveTitle>
+						<gco:CharacterString>c:\users\subte\onedrive\documents\geosoft projects\vrify.gpf</gco:CharacterString>
+					</gmd:collectiveTitle>
+				</gmd:CI_Citation>
+			</gmd:citation>
+			<gmd:resourceFormat>
+				<gmd:MD_Format>
+					<gmd:name>
+						<gco:CharacterString>tif</gco:CharacterString>
+					</gmd:name>
+				</gmd:MD_Format>
+			</gmd:resourceFormat>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+					</gmd:individualName>
+				</gmd:CI_ResponsibleParty>
+				<gmd:C_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Ian MacLeod</gco:CharacterString>
+					</gmd:individualName>
+				</gmd:C_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>Magnetics</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>World</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>Processed</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>Geophysics</gco:CharacterString>
+					</gmd:keyword>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:resourceSpecificUsage>
+				<gmd:MD_Usage>
+					<gmd:specificUsage>
+						<gco:CharacterString>Public</gco:CharacterString>
+					</gmd:specificUsage>
+				</gmd:MD_Usage>
+			</gmd:resourceSpecificUsage>
+			<gmd:extent>
+				<gmd:EX_Extent>
+					<gmd:geographicElement>
+						<gmd:EX_GeographicBoundingBox>
+							<gmd:westBoundLongitude>
+								<gco:Decimal>-119.5</gco:Decimal>
+							</gmd:westBoundLongitude>
+							<gmd:eastBoundLongitude>
+								<gco:Decimal>-118.9</gco:Decimal>
+							</gmd:eastBoundLongitude>
+							<gmd:southBoundLatitude>
+								<gco:Decimal>38.75</gco:Decimal>
+							</gmd:southBoundLatitude>
+							<gmd:northBoundLatitude>
+								<gco:Decimal>39.25</gco:Decimal>
+							</gmd:northBoundLatitude>
+						</gmd:EX_GeographicBoundingBox>
+					</gmd:geographicElement>
+				</gmd:EX_Extent>
+			</gmd:extent>
+			<gmd:abstract>
+				<gco:CharacterString>This is a globally corrected reduction to the pole (RTP) of the World Digital Magnetic Anomaly Map.  The reduction was completed in 2x2 degree tiles that were recombined to create this global image.</gco:CharacterString>
+			</gmd:abstract>
+		</gmd:MD_DataIdentification>
+	</gmd:identificationInfo>
+	<gmd:contact>
+		<gmd:CI_ResponsibleParty>
+			<gmd:individualName>
+				<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+			</gmd:individualName>
+		</gmd:CI_ResponsibleParty>
+		<gmd:C_ResponsibleParty/>
+	</gmd:contact>
+	<gmd:dataSetURI>
+		<gco:CharacterString>http://projects.gtk.fi/WDMAM/</gco:CharacterString>
+	</gmd:dataSetURI>
+	<gmd:dataQualityInfo>
+		<gmd:DQ_DataQuality>
+			<gmd:lineage>
+				<gmd:LI_Lineage>
+					<gmd:processStep xlink:type="Geosoft Process" xlink:title="geogxnet.dll(Geosoft.GX.GridUtils.CopyConvertMultiGrids;Run)">
+						<gmd:LI_ProcessStep>
+							<gmd:dateTime>
+								<gco:DateTime>2024-09-15T19:52:50</gco:DateTime>
+							</gmd:dateTime>
+							<gmd:processor>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+									</gmd:individualName>
+								</gmd:CI_ResponsibleParty>
+							</gmd:processor>
+							<gmd:source xlink:type="Data Parameter" xlink:role="GRIDCOPY::DISPLAY_OPTION" xlink:title="Do not display">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="GRIDCOPY::IN" xlink:title="..\Personal_Projects\interview_prep\vrify-dd\data\RTP.GRD(GRD)">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="GRIDCOPY::OUT" xlink:title="..\Personal_Projects\interview_prep\vrify-dd\grd_test\RTP.tif(TIF;TYPE=DATA)">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="GRIDCOPY::OUT_FORMAT" xlink:title="TIF;TYPE=DATA">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="GRIDCOPY::OVERWRITE" xlink:title="1">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Source" xlink:role="GRID" xlink:title="c:\Users\subte\OneDrive\documents\Personal_Projects\interview_prep\vrify-dd\data\RTP.GRD">
+								<gmd:LI_Source/>
+							</gmd:source>
+						</gmd:LI_ProcessStep>
+					</gmd:processStep>
+				</gmd:LI_Lineage>
+			</gmd:lineage>
+		</gmd:DQ_DataQuality>
+	</gmd:dataQualityInfo>
+	<gmd:dateStamp>
+		<gco:Date>2024-9-15</gco:Date>
+	</gmd:dateStamp>
+	<gmd:referenceSystemInfo>
+		<gmd:MD_ReferenceSystem>
+			<gmd:referenceSystemIdentifier>
+				<gmd:RS_Identifier>
+					<gmd:codeSpace>
+						<gco:CharacterString>ESRI</gco:CharacterString>
+					</gmd:codeSpace>
+					<gmd:code>
+						<gco:CharacterString>GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433],AUTHORITY["EPSG",4326]]</gco:CharacterString>
+					</gmd:code>
+					<gmd:version>
+						<gco:CharacterString>1</gco:CharacterString>
+					</gmd:version>
+				</gmd:RS_Identifier>
+			</gmd:referenceSystemIdentifier>
+		</gmd:MD_ReferenceSystem>
+	</gmd:referenceSystemInfo>
+</gmd:MD_Metadata>

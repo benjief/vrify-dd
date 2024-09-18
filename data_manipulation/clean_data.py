@@ -1,55 +1,50 @@
 import pandas as pd
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog
-from utils import select_file, load_file
+from utils import select_file, load_file, select_column
 
-def select_column(df):
-    """Prompt the user to select which column to clean."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    available_columns = df.columns.tolist()
-    column_name = simpledialog.askstring("Input", f"Available columns: {', '.join(available_columns)}\nWhich column would you like to clean?")
-    
-    if column_name not in available_columns:
-        raise ValueError(f"Column '{column_name}' not found in DataFrame.")
-    
-    return column_name
-
-def get_cleaning_value(column_name):
-    """Prompt the user for the value to clean from the selected column."""
+def get_cleaning_range(column_name):
+    """Prompt the user for the inclusive range of values to keep in the selected column."""
     root = tk.Tk()
     root.withdraw()
     
-    cleaning_value = simpledialog.askstring("Input", f"Enter the value to clean in the column '{column_name}':")
+    # Prompt for the lower bound
+    lower_bound = simpledialog.askstring("Input", f"Enter the lower bound of the range for the column '{column_name}':")
+    if lower_bound is None:
+        messagebox.showerror("Error", "No lower bound provided.")
+        return None, None
     
-    if cleaning_value is None:
-        messagebox.showerror("Error", "No value provided for cleaning.")
-        return None
+    # Prompt for the upper bound
+    upper_bound = simpledialog.askstring("Input", f"Enter the upper bound of the range for the column '{column_name}':")
+    if upper_bound is None:
+        messagebox.showerror("Error", "No upper bound provided.")
+        return None, None
     
-    # Remove leading/trailing spaces
-    cleaning_value = cleaning_value.strip()
+    # Remove leading/trailing spaces and convert to numeric if possible
+    lower_bound = lower_bound.strip()
+    upper_bound = upper_bound.strip()
 
-    return cleaning_value
+    # Convert to numeric values
+    try:
+        lower_bound = pd.to_numeric(lower_bound, errors='raise')
+        upper_bound = pd.to_numeric(upper_bound, errors='raise')
+    except ValueError:
+        messagebox.showerror("Error", "Invalid input. Please enter numeric values for the range.")
+        return None, None
 
-def clean_data(df, column, cleaning_value):
-    """Remove rows from the DataFrame where the selected column contains the specified value."""
+    return lower_bound, upper_bound
+
+def clean_data_by_range(df, column, lower_bound, upper_bound):
+    """Remove rows from the DataFrame where the selected column is outside the specified inclusive range."""
     initial_count = len(df)
     
-    # Try to convert the cleaning value to a numeric type if possible
-    try:
-        # Attempt to convert cleaning_value to a number (int or float)
-        cleaning_value_numeric = pd.to_numeric(cleaning_value, errors='coerce')
-    except ValueError:
-        cleaning_value_numeric = cleaning_value  # Keep it as a string if conversion fails
-
-    # Check if the column is numeric and convert cleaning_value to numeric if necessary
-    if pd.api.types.is_numeric_dtype(df[column]):
-        # Perform cleaning with numeric comparison
-        df_cleaned = df[df[column] != cleaning_value_numeric]
-    else:
-        # Perform cleaning with string comparison
-        df_cleaned = df[df[column] != cleaning_value]
+    # Check if the column is numeric
+    if not pd.api.types.is_numeric_dtype(df[column]):
+        messagebox.showerror("Error", f"Column '{column}' is not numeric.")
+        return df
+    
+    # Remove rows outside the specified range (inclusive)
+    df_cleaned = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
     
     final_count = len(df_cleaned)
     rows_removed = initial_count - final_count
@@ -88,20 +83,24 @@ if file_path:
     df = load_file(file_path)
     
     if df is not None:
-        # Prompt the user to select a column
-        column_to_clean = select_column(df)
+        # Ask if the user wants to clean the data or skip to statistics
+        root = tk.Tk()
+        root.withdraw()
+        user_choice = messagebox.askyesno("Data Cleaning", "Would you like to clean the data before proceeding to statistics?")
         
-        # Prompt the user to input a value to clean
-        cleaning_value = get_cleaning_value(column_to_clean)
-        
-        if cleaning_value is not None:
-            # Clean the data
-            df_cleaned = clean_data(df, column_to_clean, cleaning_value)
+        if user_choice:
+            # Prompt the user to select a column
+            column_to_clean = select_column(df, "Which column would you like to clean?")
             
-            # Display first 5 rows of cleaned data
-            print(df_cleaned.head().to_markdown(index=False, numalign="left", stralign="left"))
-
-            # Save the cleaned file
-            save_cleaned_file(df_cleaned, file_path)
+            # Prompt the user to input a range of values to keep
+            lower_bound, upper_bound = get_cleaning_range(column_to_clean)
+            
+            if lower_bound is not None and upper_bound is not None:
+                # Clean the data by the specified range
+                df_cleaned = clean_data_by_range(df, column_to_clean, lower_bound, upper_bound)
+                
+                # Save the cleaned file
+                save_cleaned_file(df_cleaned, file_path)
+                df = df_cleaned  # Update df with the cleaned version
 else:
     print("No file selected. Exiting...")

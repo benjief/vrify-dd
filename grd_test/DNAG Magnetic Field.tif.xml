@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../schemas/iso19139fra/gmd/gmd.xsd" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:map="urn:brgm:mapping" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gfc="http://www.isotc211.org/2005/gfc" xmlns:gco="http://www.isotc211.org/2005/gco">
+	<geosoft xmlns="http://www.geosoft.com/schema/geo">
+		<dataset version="1">
+			<lineage>
+				<process name="MapExport" user="Benjie Friedman" version="Version 2024.1 (20240530.21)" date="2024-09-15" time="20:45:28">
+					<parameter name="MAPEXPORT.ACTIVEVIEW" value="Data" type="string"/>
+					<parameter name="MAPEXPORT.BITS" value="24" type="integer"/>
+					<parameter name="MAPEXPORT.CELLSIZE" value="0.00104852119333444" type="double"/>
+					<parameter name="MAPEXPORT.DITHER" value="FloydsteinDithering" type="string"/>
+					<parameter name="MAPEXPORT.FORMAT" value="GeoTIFF (*.tif)" type="string"/>
+					<parameter name="MAPEXPORT.MAXX" value="299.999999999995" type="double"/>
+					<parameter name="MAPEXPORT.MAXY" value="253.22580645161" type="double"/>
+					<parameter name="MAPEXPORT.MINX" value="0" type="double"/>
+					<parameter name="MAPEXPORT.MINY" value="0" type="double"/>
+					<parameter name="MAPEXPORT.NAME" value="..\Personal_Projects\interview_prep\vrify-dd\grd_test\DNAG Magnetic Field.tif" type="string"/>
+					<parameter name="MAPEXPORT.OPTIONS" value="" type="string"/>
+					<parameter name="MAPEXPORT.OUTPUT" value="FILE" type="string"/>
+					<parameter name="MAPEXPORT.SIZEX" value="899" type="integer"/>
+					<parameter name="MAPEXPORT.SIZEY" value="759" type="integer"/>
+					<parameter name="MAPEXPORT.VIEWS" value="1" type="integer"/>
+				</process>
+			</lineage>
+			<title>DNAG Magnetic Field</title>
+			<file_format>tif</file_format>
+			<project_name>c:\users\subte\onedrive\documents\geosoft projects\vrify.gpf</project_name>
+			<data_created_by>Benjie Friedman</data_created_by>
+			<data_creation_date>2024-09-15</data_creation_date>
+			<metadata_created_by>Benjie Friedman</metadata_created_by>
+			<metadata_creation_date>2024-09-15</metadata_creation_date>
+			<georeference>
+				<dataextents>
+					<extent2d minx="-119.68788953250679" miny="38.60171046749322" maxx="-118.74631750089246" maxy="39.396489532040725"/>
+				</dataextents>
+				<projection type="GEOGRAPHIC" name="WGS 84" ellipsoid="WGS 84" datum="WGS 84" wellknown_epsg="4326" datumtrf="WGS 84" datumtrf_description="[WGS 84] World" radius="6378137" eccentricity="0.081819190842621486">
+					<shift x="0" y="0" z="0"/>
+					<units name="dega" unit_scale="1"/>
+				</projection>
+			</georeference>
+		</dataset>
+	</geosoft>
+	<gmd:dataQualityInfo>
+		<gmd:DQ_DataQuality>
+			<gmd:lineage>
+				<gmd:LI_Lineage>
+					<gmd:processStep xlink:type="Geosoft Process" xlink:title="MapExport">
+						<gmd:LI_ProcessStep>
+							<gmd:dateTime>
+								<gco:DateTime>2024-09-15T20:45:28</gco:DateTime>
+							</gmd:dateTime>
+							<gmd:processor>
+								<gmd:CI_ResponsibleParty>
+									<gmd:individualName>
+										<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+									</gmd:individualName>
+								</gmd:CI_ResponsibleParty>
+							</gmd:processor>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.ACTIVEVIEW" xlink:title="Data">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.BITS" xlink:title="24">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.CELLSIZE" xlink:title="0.00104852119333444">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.DITHER" xlink:title="FloydsteinDithering">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.FORMAT" xlink:title="GeoTIFF (*.tif)">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.MAXX" xlink:title="299.999999999995">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.MAXY" xlink:title="253.22580645161">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.MINX" xlink:title="0">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.MINY" xlink:title="0">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.NAME" xlink:title="..\Personal_Projects\interview_prep\vrify-dd\grd_test\DNAG Magnetic Field.tif">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.OPTIONS" xlink:title="">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.OUTPUT" xlink:title="FILE">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.SIZEX" xlink:title="899">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.SIZEY" xlink:title="759">
+								<gmd:LI_Source/>
+							</gmd:source>
+							<gmd:source xlink:type="Data Parameter" xlink:role="MAPEXPORT.VIEWS" xlink:title="1">
+								<gmd:LI_Source/>
+							</gmd:source>
+						</gmd:LI_ProcessStep>
+					</gmd:processStep>
+				</gmd:LI_Lineage>
+			</gmd:lineage>
+		</gmd:DQ_DataQuality>
+	</gmd:dataQualityInfo>
+	<gmd:identificationInfo>
+		<gmd:MD_DataIdentification>
+			<gmd:citation>
+				<gmd:CI_Citation>
+					<gmd:title>
+						<gco:CharacterString>DNAG Magnetic Field</gco:CharacterString>
+					</gmd:title>
+					<gmd:collectiveTitle>
+						<gco:CharacterString>c:\users\subte\onedrive\documents\geosoft projects\vrify.gpf</gco:CharacterString>
+					</gmd:collectiveTitle>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2024-9-15</gco:Date>
+							</gmd:date>
+						</gmd:CI_Date>
+					</gmd:date>
+				</gmd:CI_Citation>
+			</gmd:citation>
+			<gmd:resourceFormat>
+				<gmd:MD_Format>
+					<gmd:name>
+						<gco:CharacterString>tif</gco:CharacterString>
+					</gmd:name>
+				</gmd:MD_Format>
+			</gmd:resourceFormat>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+					</gmd:individualName>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:extent>
+				<gmd:EX_Extent>
+					<gmd:geographicElement>
+						<gmd:EX_GeographicBoundingBox>
+							<gmd:westBoundLongitude>
+								<gco:Decimal>-119.68788953250679</gco:Decimal>
+							</gmd:westBoundLongitude>
+							<gmd:eastBoundLongitude>
+								<gco:Decimal>-118.74631750089246</gco:Decimal>
+							</gmd:eastBoundLongitude>
+							<gmd:southBoundLatitude>
+								<gco:Decimal>38.60171046749322</gco:Decimal>
+							</gmd:southBoundLatitude>
+							<gmd:northBoundLatitude>
+								<gco:Decimal>39.396489532040725</gco:Decimal>
+							</gmd:northBoundLatitude>
+						</gmd:EX_GeographicBoundingBox>
+					</gmd:geographicElement>
+				</gmd:EX_Extent>
+			</gmd:extent>
+		</gmd:MD_DataIdentification>
+	</gmd:identificationInfo>
+	<gmd:contact>
+		<gmd:CI_ResponsibleParty>
+			<gmd:individualName>
+				<gco:CharacterString>Benjie Friedman</gco:CharacterString>
+			</gmd:individualName>
+		</gmd:CI_ResponsibleParty>
+	</gmd:contact>
+	<gmd:dateStamp>
+		<gco:Date>2024-9-15</gco:Date>
+	</gmd:dateStamp>
+	<gmd:referenceSystemInfo>
+		<gmd:MD_ReferenceSystem>
+			<gmd:referenceSystemIdentifier>
+				<gmd:RS_Identifier>
+					<gmd:codeSpace>
+						<gco:CharacterString>ESRI</gco:CharacterString>
+					</gmd:codeSpace>
+					<gmd:code>
+						<gco:CharacterString>GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433],AUTHORITY["EPSG",4326]]</gco:CharacterString>
+					</gmd:code>
+					<gmd:version>
+						<gco:CharacterString>1</gco:CharacterString>
+					</gmd:version>
+				</gmd:RS_Identifier>
+			</gmd:referenceSystemIdentifier>
+		</gmd:MD_ReferenceSystem>
+	</gmd:referenceSystemInfo>
+</gmd:MD_Metadata>
