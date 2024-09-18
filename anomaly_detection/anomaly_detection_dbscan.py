@@ -5,8 +5,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import NearestNeighbors
 import matplotlib.pyplot as plt
 
-def prepare_data(file_path):
-    df = pd.read_csv(file_path)
+def prepare_data(fp_1, fp_2):
+    df1 = pd.read_csv(fp_1)  
+    df2 = pd.read_csv(fp_2)  
+    
+    # Concatenate datasets into one larger DataFrame
+    df = pd.concat([df1, df2], ignore_index=True)
 
     # Prepare the data to include spatial information (Longitude, Latitude) and line index
     X = df[['Flight line number', 'Longitude', 'Latitude', 'Residual magnetic field (comprehensive model CM4)']]
@@ -36,7 +40,7 @@ def calculate_k_distance(X):
     plt.show()
 
 def perform_dbscan(df, X):
-    dbscan = DBSCAN(eps=0.18, min_samples=8)  # k estimated from k-distance graph; min_samples to be tweaked
+    dbscan = DBSCAN(eps=0.18, min_samples=8)  # k estimated from k-distance graph; min_samples can be tweaked
     df['Cluster'] = dbscan.fit_predict(X)
 
 
@@ -46,31 +50,14 @@ def perform_dbscan(df, X):
     
     return anomalies
 
-def visualize_results(df):
-    plt.figure(figsize=(10, 6))
-
-    # Plot the magnetic field values for all data points, with different colors for clusters
-    for line_number, line_data in df.groupby('Flight line number'):
-        plt.plot(line_data.index, line_data['Residual Magnetic Field (nT)'], label=f'Line {line_number}')
-
-    # Plot the detected anomalies in red
-    for line_number, line_data in df.groupby('Flight line number'):
-        anomalies = line_data[line_data['Cluster'] == -1]
-        plt.scatter(anomalies.index, anomalies['Residual Magnetic Field (nT)'], color='red', label=f'Anomalies in Line {line_number}')
-
-    plt.xlabel('Data Points')
-    plt.ylabel('Magnetic Field (nT)')
-    plt.legend()
-    plt.title('Magnetic Field Anomalies Detected by DBSCAN')
-    plt.show()
-
 def save_anomalies(anomalies):
-    output_file_path = "../data/processed/vector_data/EPSG_4326/walker_lake_mag_anomalies.csv"
+    output_file_path = "../data/processed/vector_data/EPSG_4326/reno_walker_lake_combined_mag_anomalies_dbscan.csv"
     anomalies.to_csv(output_file_path, index=False)
     print(f"Anomalies saved to {output_file_path}")
 
-walker_lake = "../data/processed/vector_data/EPSG_4326/walker_lake_mag.csv" 
-df, X = prepare_data(walker_lake)
-# calculate_k_distance(X)
-anomalies = perform_dbscan(df, X)
-save_anomalies(anomalies)
+fp_1 = '../data/processed/vector_data/EPSG_4326/reno_mag.csv'
+fp_2 = '../data/processed/vector_data/EPSG_4326/walker_lake_mag.csv'
+df, X = prepare_data(fp_1, fp_2)
+calculate_k_distance(X)
+# anomalies = perform_dbscan(df, X)
+# save_anomalies(anomalies)
