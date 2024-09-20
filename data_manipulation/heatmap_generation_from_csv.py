@@ -10,30 +10,7 @@ import rasterio
 from rasterio.transform import from_origin
 from utils import select_file, select_column
 
-def get_heatmap_label():
-    """Prompt the user for x-label, y-label, title, and legend label."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
-    
-    # Prompt for the x-label, y-label, and title
-    x_label = simpledialog.askstring("Input", "Enter x-label for the heatmap:")
-    y_label = simpledialog.askstring("Input", "Enter y-label for the heatmap:")
-    plot_title = simpledialog.askstring("Input", "Enter title for the heatmap:")
-    legend_label = simpledialog.askstring("Input", "Enter label for the legend:")
-    
-    return x_label, y_label, plot_title, legend_label   
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import geopandas as gpd
-from shapely.geometry import Point
-from scipy.interpolate import griddata
-import tkinter as tk
-from tkinter import simpledialog
-from utils import select_file, select_column
-
-def get_heatmap_label():
+def get_heatmap_labels():
     """Prompt the user for x-label, y-label, title, and legend label."""
     root = tk.Tk()
     root.withdraw()  # Hide the root window
@@ -102,7 +79,7 @@ if csv_file_path:
     grid_z = griddata((lon, lat), values, (grid_x, grid_y), method='cubic')
     
     # Prompt the user for x-label, y-label, title, and legend label
-    x_label, y_label, plot_title, legend_label = get_heatmap_label()
+    x_label, y_label, plot_title, legend_label = get_heatmap_labels()
 
     # Plot the interpolated heatmap
     plt.figure(figsize=(10, 8))
