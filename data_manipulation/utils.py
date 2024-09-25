@@ -63,8 +63,12 @@ def select_column(df, prompt):
     available_columns = '\n'.join(df.columns.tolist())  # Join columns with newlines
     column_name = simpledialog.askstring("Input", f"Available columns:\n\n{available_columns}\n\n{prompt}")
     
+    if column_name is None or column_name == "":
+        return None
+    
     if column_name not in df.columns:
-        raise ValueError(f"Column '{column_name}' not found in DataFrame.")
+        print(f"Column '{column_name}' not found in DataFrame.")
+        return None
     
     return column_name
 
@@ -78,11 +82,17 @@ def select_multiple_columns(df, prompt):
 
     # Allow user to input columns separated by commas
     columns = simpledialog.askstring("Input", f"{prompt}\n\nAvailable columns:\n\n{available_columns}")
+    
+    # Handle cancel or empty input
+    if columns is None or columns.strip() == "":
+        print("No columns selected.")
+        return None
 
     # Split and clean the input into a list of columns
     selected_columns = [col.strip() for col in columns.split(',') if col.strip() in df.columns]
     
     if not selected_columns:
-        raise ValueError("No valid columns selected.")
+        return None
 
     return selected_columns
+
